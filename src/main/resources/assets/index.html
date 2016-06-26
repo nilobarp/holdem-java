@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Poker hand analyzer</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
+<style>
+  .column {
+    background: transparent;
+  }
+</style>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="row">
+        <div class="column">
+            <player v-ref:dealer></player>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+            <player v-ref:player1></player>
+        </div>
+        <div class="column">
+            <player v-ref:player2></player>
+        </div>
+        <div class="column">
+            <player v-ref:player3></player>
+        </div>
+        <div class="column">
+            <player v-ref:player4></player>
+        </div>
+        <div class="column">
+            <player v-ref:player5></player>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+            <deck></deck>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
