@@ -41,7 +41,7 @@ new Vue ({
         data.cards = pokerTable.cards.join(" ")
         pokerTable.players.map((p) => {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
 
-        this.$http.post('http://localhost:8080/api/analyze', data).then(
+        this.$http.post('/api/analyze', data).then(
           (response) => {
             console.log(response.data)
             response.data.players.map((p) => {

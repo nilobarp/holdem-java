@@ -30,7 +30,7 @@
       }
     },
     ready () {
-      this.$http.get('http://localhost:8080/api/profile').then(
+      this.$http.get('/api/profile').then(
         (response) => {
           this.playerName = response.data.name;
           this.avatarImg = response.data.avatar;

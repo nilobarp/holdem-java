@@ -38,7 +38,7 @@ At the core of it, analyzer takes a `table` object which is a simple container c
 Once we have the card's array ordered by relevance, a score can be easily calculated by bit shifting the card vaues by 4 places. With the card array, last element of the array is used as is, second last gets shifted by 4 places, third last by 8 places and so on. `3<<24|3<<20|3<<16|5<<12|5<<8|10<<4|6 = 53695910`. This score is then used to find winning hands in addition to ranks.
 
 ###Build steps
-#####Frontend
+####Frontend
 To build the JS portion:
 - Change to `holdem/src/main/resources/assets`
 - Install dependencies `npm install`
@@ -46,10 +46,19 @@ To build the JS portion:
 
 ####Backend
 Build with maven
-- From project root run `mvn install`
+- From project root, run: `mvn install`
 
+###Test
+- From project root, run: `mvn test`
 ###Run
-Start the server using `config.yml` from project root.
+- Start the server using `config.yml` from project root.
 `java -jar target/holdem-1.0-SNAPSHOT.jar server config.yml`
+- Open browser to `http://localhost:9000`
 
 ###REST End Points
+
+| Verb | End Point | Purpose |
+|-------:|-------------|-----------|
+| POST | /api/analyze (com.nilobarp.holdem.Game) | Runs analysis on `Table` object and returns hand ranks|
+| GET   |  /api/deck (com.nilobarp.holdem.Deck) | Returns a shuffled deck instance |
+|  GET  |   /api/profile (com.nilobarp.holdem.Profile) | Returns a random player profile |

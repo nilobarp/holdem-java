@@ -11,7 +11,7 @@
           >
         </card>
     </div>
-    <div v-show="!showDeck">
+    <div class="buttons" v-show="!showDeck">
       <button @click="analyzeHands">Analyze Hands</button>
       <button @click="restart">Restart</button>
     </div>
@@ -30,7 +30,7 @@
     },
     methods: {
       getDeck () {
-        this.$http.get('http://localhost:8080/api/deck').then(
+        this.$http.get('/api/deck').then(
           (response) => {
             response.data.map((card) => { this.cards.push(card) })
         });
@@ -69,5 +69,17 @@
   }
   .deck .card:hover {
     top: -10px;
+  }
+  .buttons {
+    display: flex;
+    height: 140px;
+    justify-content: center;
+  }
+  .buttons button {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30%;
   }
 </style>

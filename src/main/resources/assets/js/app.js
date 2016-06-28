@@ -42,7 +42,7 @@ new Vue ({
         data.cards = pokerTable.cards.join(" ")
         pokerTable.players.map((p) => {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
 
-        this.$http.post('http://localhost:8080/api/analyze', data).then(
+        this.$http.post('/api/analyze', data).then(
           (response) => {
             console.log(response.data)
             response.data.players.map((p) => {
@@ -134,7 +134,7 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"vue":8,"vue-hot-reload-api":6,"vueify/lib/insert-css":9}],3:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n.deck {\n  position: relative;\n  height: 140px;\n  margin-top: 25px;\n}\n.deck .card {\n    position: absolute;\n}\n.deck .card:hover {\n  top: -10px;\n}\n")
+var __vueify_style__ = __vueify_insert__.insert("\n.deck {\n  position: relative;\n  height: 140px;\n  margin-top: 25px;\n}\n.deck .card {\n    position: absolute;\n}\n.deck .card:hover {\n  top: -10px;\n}\n.buttons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 140px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.buttons button {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 30px;\n  width: 30%;\n}\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -155,7 +155,7 @@ exports.default = {
     getDeck: function getDeck() {
       var _this = this;
 
-      this.$http.get('http://localhost:8080/api/deck').then(function (response) {
+      this.$http.get('/api/deck').then(function (response) {
         response.data.map(function (card) {
           _this.cards.push(card);
         });
@@ -183,13 +183,13 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"deck\" v-show=\"showDeck\">\n    <card class=\"card animated\" v-for=\"(index, card) in cards\" :value=\"card\" :style=\"{left: (index * 20) + 'px'}\" transition=\"cardAnimation\" stagger=\"25\" @click=\"dealCard(card)\">\n    </card>\n</div>\n<div v-show=\"!showDeck\">\n  <button @click=\"analyzeHands\">Analyze Hands</button>\n  <button @click=\"restart\">Restart</button>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"deck\" v-show=\"showDeck\">\n    <card class=\"card animated\" v-for=\"(index, card) in cards\" :value=\"card\" :style=\"{left: (index * 20) + 'px'}\" transition=\"cardAnimation\" stagger=\"25\" @click=\"dealCard(card)\">\n    </card>\n</div>\n<div class=\"buttons\" v-show=\"!showDeck\">\n  <button @click=\"analyzeHands\">Analyze Hands</button>\n  <button @click=\"restart\">Restart</button>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n.deck {\n  position: relative;\n  height: 140px;\n  margin-top: 25px;\n}\n.deck .card {\n    position: absolute;\n}\n.deck .card:hover {\n  top: -10px;\n}\n"] = false
+    __vueify_insert__.cache["\n.deck {\n  position: relative;\n  height: 140px;\n  margin-top: 25px;\n}\n.deck .card {\n    position: absolute;\n}\n.deck .card:hover {\n  top: -10px;\n}\n.buttons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 140px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.buttons button {\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 30px;\n  width: 30%;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -219,7 +219,7 @@ exports.default = {
   ready: function ready() {
     var _this = this;
 
-    this.$http.get('http://localhost:8080/api/profile').then(function (response) {
+    this.$http.get('/api/profile').then(function (response) {
       _this.playerName = response.data.name;
       _this.avatarImg = response.data.avatar;
     });
