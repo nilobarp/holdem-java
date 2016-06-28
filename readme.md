@@ -50,6 +50,7 @@ Build with maven
 
 ###Test
 - From project root, run: `mvn test`
+
 ###Run
 - Start the server using `config.yml` from project root.
 `java -jar target/holdem-1.0-SNAPSHOT.jar server config.yml`
@@ -58,7 +59,7 @@ Build with maven
 ###REST End Points
 
 | Verb | End Point | Purpose |
-|-------:|-------------|-----------|
+|-------:|:-------------|:-----------|
 | POST | /api/analyze (com.nilobarp.holdem.Game) | Runs analysis on `Table` object and returns hand ranks|
 | GET   |  /api/deck (com.nilobarp.holdem.Deck) | Returns a shuffled deck instance |
 |  GET  |   /api/profile (com.nilobarp.holdem.Profile) | Returns a random player profile |
