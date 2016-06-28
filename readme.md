@@ -1,4 +1,7 @@
 #Poker Hand Analyzer
+
+[![Build Status](https://travis-ci.org/nilobarp/holdem.svg?branch=master)](https://travis-ci.org/nilobarp/holdem)
+
 ##Background
 Each hand is passed through a reducer method that determines hand rank and also calculates relative score based on card relevance of hand.
 
