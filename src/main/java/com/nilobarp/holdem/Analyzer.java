@@ -36,26 +36,35 @@ public class Analyzer {
         return this.table;
     }
 
-
+    /**
+     * Reduces the given hand to an analysable state
+     * @param communityCards
+     * @param player
+     * @return Player
+     */
     private Player reduce (String communityCards, final Player player) {
-        String[] cardsInHand;// = new String[communityCards.length() + player.getCards().length()];
+        String[] cardsInHand;
+        //combine community and hold cards
         String allCards = communityCards.concat(player.getCards());
 
+        //split into groups of 2 chars (suit + value)
         cardsInHand = allCards.split("(?<=\\G.{2})");
 
         //Represent the cards numerically
         Integer[] numCards = new Integer[cardsInHand.length];
         for(int i = 0; i < cardsInHand.length; i++) {
             String thisCard = cardsInHand[i];
+            //get weight of the card suit
             int suit = suitWeight(thisCard.replaceAll("[^CDHS]", ""));
+            //get numeric value of the card face
             int faceValue = faceValue(thisCard.replaceAll("[CDHS]", ""));
 
             numCards[i] = suit + faceValue;
         }
 
         final HashMap<Integer, Integer> hash = new HashMap<Integer, Integer>();
+        //arrange the cards according to number of appearance
         for(int i = 0; i < numCards.length; i++) {
-            //int key = extractSuit(numCards[i]);
             int value = extractValue(numCards[i]);
 
             hash.put(value, (hash.get(value) != null && hash.get(value) >= 1) ? hash.get(value) + 1 : 1);
@@ -84,6 +93,12 @@ public class Analyzer {
         return player;
     }
 
+    /**
+     * Finds rank of the hand
+     * @param cards
+     * @param hash
+     * @return rank order
+     */
     private int rankHand (Integer[] cards, HashMap<Integer, Integer> hash) {
         int rank = 0;
         if(isRoyalFlush(cards))
@@ -108,6 +123,11 @@ public class Analyzer {
         return rank;
     }
 
+    /**
+     * Determine if the given cards constitutes a flush
+     * @param cards
+     * @return boolean
+     */
     private boolean isFlush(Integer[] cards) {
         int[] suits = new int[cards.length];
         for(int i = 0; i < cards.length; i++)
@@ -131,6 +151,11 @@ public class Analyzer {
         return seqCount == 5;
     }
 
+    /**
+     * Determine if the given cards constitutes a straight
+     * @param cards
+     * @return boolean
+     */
     private boolean isStraight (Integer[] cards) {
         int[] values = new int[cards.length];
         for(int i = 0; i < cards.length; i++)
@@ -151,10 +176,20 @@ public class Analyzer {
         return seqCount >= 5;
     }
 
+    /**
+     * Determine if the given cards constitutes a straight flush
+     * @param cards
+     * @return boolean
+     */
     private boolean isStraightFlush (Integer[] cards) {
         return isStraight(cards) && isFlush(cards);
     }
 
+    /**
+     * Determine if the given cards constitutes a royal flush
+     * @param cards
+     * @return boolean
+     */
     private boolean isRoyalFlush (Integer[] cards) {
         if(isFlush(cards)) {
             boolean royalSeq = false;
@@ -194,6 +229,11 @@ public class Analyzer {
         return false;
     }
 
+    /**
+     * Determine if the given cards constitutes a one pair
+     * @param hash
+     * @return boolean
+     */
     private boolean isOnePair (HashMap<Integer, Integer> hash) {
         int pairCount = 0;
         for(Integer value : hash.values()) {
@@ -205,6 +245,11 @@ public class Analyzer {
         return pairCount == 1;
     }
 
+    /**
+     * Determine if the given cards constitutes a two pair
+     * @param hash
+     * @return boolean
+     */
     private boolean isTwoPair (HashMap<Integer, Integer> hash) {
         int pairCount = 0;
         for(Integer value : hash.values()) {
@@ -216,6 +261,11 @@ public class Analyzer {
         return pairCount >= 2;
     }
 
+    /**
+     * Determine if the given cards constitutes a three of a kind
+     * @param hash
+     * @return boolean
+     */
     private boolean isThreeOfaKind (HashMap<Integer, Integer> hash) {
         int threes = 0;
         for(Integer value : hash.values()) {
@@ -227,6 +277,11 @@ public class Analyzer {
         return threes == 1;
     }
 
+    /**
+     * Determine if the given cards constitutes a four of a kind
+     * @param hash
+     * @return boolean
+     */
     private boolean isFourOfaKind (HashMap<Integer, Integer> hash) {
         int fours = 0;
         for(Integer value : hash.values()) {
@@ -238,6 +293,11 @@ public class Analyzer {
         return fours == 1;
     }
 
+    /**
+     * Determine if the given cards constitutes a full house
+     * @param hash
+     * @return boolean
+     */
     private boolean isFullHouse (HashMap<Integer, Integer> hash) {
         int threes = 0;
         for(Integer value : hash.values()) {
@@ -252,6 +312,11 @@ public class Analyzer {
             return threes == 1 && (this.isOnePair(hash) || this.isTwoPair(hash));
     }
 
+    /**
+     * Calculate relevant score of the hand
+     * @param cards
+     * @return hand score
+     */
     private int pokerScore (Integer[] cards) {
         int score = 0;
         int shiftBy = 4 * (cards.length - 1);
@@ -262,6 +327,11 @@ public class Analyzer {
         return score;
     }
 
+    /**
+     * Extract the suit's weight value
+     * @param card
+     * @return suit weight
+     */
     private int extractSuit (int card) {
         if(card < 200)
             return 100;
@@ -273,10 +343,20 @@ public class Analyzer {
             return 400;
     }
 
+    /**
+     * Extract card's face value
+     * @param card
+     * @return card face value
+     */
     private int extractValue (int card) {
         return card%(extractSuit(card));
     }
 
+    /**
+     * Returns weight of a suit
+     * @param suit
+     * @return suit weight
+     */
     private int suitWeight (String suit) {
         return suit.equals("C") ? 100
                 : suit.equals("D") ? 200
@@ -285,6 +365,11 @@ public class Analyzer {
                 : 0;
     }
 
+    /**
+     * Returns numerical value of a card's face
+     * @param face
+     * @return face value
+     */
     private int faceValue (String face) {
         return face.equals("T") ? 10
                 : face.equals("J") ? 11

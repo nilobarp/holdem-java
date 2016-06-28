@@ -21,7 +21,7 @@ public class Dealer {
     private int deckIndex = 0;
 
     public Dealer () {
-        //shuffle();
+        shuffle();
     }
 
     /**

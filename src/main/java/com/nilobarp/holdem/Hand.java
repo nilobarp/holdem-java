@@ -1,7 +1,5 @@
 package com.nilobarp.holdem;
 
-import java.util.HashMap;
-
 public class Hand {
     /**
      * Hands are first sorted by rank, if two ranks are same a tie occurs.
@@ -16,11 +14,11 @@ public class Hand {
      * Hearts   | 300
      * Spade    | 400
      *
-     * The value of each suit is added to the cards face value and stored in
+     * The value of each suit is added to the card's face value and stored in
      * the int[]. This distinguishes each card in the deck and can be easily
      * analyzed for hand type and score calculations.
      *
-     * See Analyzer->redude() method for reduction process
+     * See Analyzer->reduce() method for reduction process
      */
 
     //Name of the hand rank Flush, Straight etc
