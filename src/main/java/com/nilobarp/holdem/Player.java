@@ -50,9 +50,10 @@ public class Player implements Comparable<Player> {
 
     public void setSuits (String suits) {
         //sort the string of suits
-        char[] s = suits.toCharArray();
-        Arrays.sort(s);
-        this.suits = new String(s);
+        //char[] s = suits.toCharArray();
+        //Arrays.sort(s);
+        //this.suits = new String(s);
+        this.suits = suits;
     }
 
     public String getSuits () {

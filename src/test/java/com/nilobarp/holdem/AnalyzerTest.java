@@ -16,11 +16,11 @@ public class AnalyzerTest {
     @Before
     public void prepare () {
         table = new Table();
-        table.setCards(Arrays.asList("SA", "D5", "SQ", "SJ", "ST"));
+        table.setCards(Arrays.asList("HA", "HK", "HQ", "HJ", "ST"));
 
         Player player = new Player();
         player.setId(1);
-        player.setCards(Arrays.asList("DA", "SK"));
+        player.setCards(Arrays.asList("H5", "S7"));
 
         table.setPlayers(Arrays.asList(player));
     }

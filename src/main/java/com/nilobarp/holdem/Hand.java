@@ -1,5 +1,6 @@
 package com.nilobarp.holdem;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -75,7 +76,11 @@ public class Hand {
     }
 
     private boolean isFlush (String suits) {
-        Matcher matcher = Pattern.compile("SSSSS|DDDDD|HHHHH|SSSSS").matcher(suits);
+        String sortedSuits;
+        char[] s = suits.toCharArray();
+        Arrays.sort(s);
+        sortedSuits = new String(s);
+        Matcher matcher = Pattern.compile("SSSSS|DDDDD|HHHHH|SSSSS").matcher(sortedSuits);
         return matcher.find();
     }
 

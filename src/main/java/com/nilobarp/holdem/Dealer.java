@@ -5,8 +5,8 @@ import java.util.*;
 public class Dealer {
 
     // dealer
-    // -> has the getDeck of cards
-    // --> can shuffle the getDeck
+    // -> has the deck of cards
+    // --> can shuffle the deck
     // -> deals 3 or 5 community cards
     // -> deals 2 cards per player
 
@@ -21,7 +21,7 @@ public class Dealer {
     private int deckIndex = 0;
 
     public Dealer () {
-        shuffle();
+        //shuffle();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Dealer {
     }
 
     /**
-     * Deals specified number of cards from the getDeck
+     * Deals specified number of cards from the deck
      * @param numberOfCards Number of cards to deal
      * @return List of cards
      * @throws Exception
@@ -49,7 +49,7 @@ public class Dealer {
         List<String> dealtCards = deckOfCards.subList(deckIndex, deckIndex + numberOfCards);
 
         /**
-         * Increment deckIndex to point to next available card in the getDeck
+         * Increment deckIndex to point to next available card in the deck
          */
         deckIndex += numberOfCards;
 
