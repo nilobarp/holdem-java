@@ -48,7 +48,7 @@ new Vue ({
               this.$refs["player" + p.id].setHand(p.hand.name)
             })
             this.$refs["player" + response.data.players[0].id].setWinner()
-          }
+          }.bind(this)
         )
       },
       'restart': function () {
