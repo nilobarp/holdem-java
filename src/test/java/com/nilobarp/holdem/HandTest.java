@@ -15,7 +15,7 @@ public class HandTest {
     HashMap<String, Integer> hash;
 
     public HandTest () {
-        this.hand = new Hand();
+        /*this.hand = new Hand();
         this.suits = "CDDSSSS";
         this.cardValues = Arrays.asList(5, 5, 14, 12, 11, 10, 2);
 
@@ -29,7 +29,7 @@ public class HandTest {
 
         hand.setValue(90098594);
 
-        hand.rank(suits, cardValues, hash);
+        hand.rank(suits, cardValues, hash);*/
     }
 
     /*@Test
@@ -45,6 +45,7 @@ public class HandTest {
         assertEquals("has same bit value", h.getValue(), this.hand.getValue());
     }*/
 
+    /*
     @Test
     public void detectsFlush () throws Exception {
         //card suits are sorted in ascending order
@@ -207,5 +208,5 @@ public class HandTest {
 
         hand.rank(this.suits, this.cardValues, this.hash);
         assertNotEquals("is four of a kind", "Four of a Kind", this.hand.getName());
-    }
+    }*/
 }

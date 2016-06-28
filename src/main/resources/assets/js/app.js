@@ -33,7 +33,16 @@ new Vue ({
         gameState(pokerTable, { type: 'DEAL', card: card }, this)
       },
       'hand.analyze': function () {
-        this.$http.post('http://localhost:8080/api/analyze', pokerTable).then(
+        //API expects cards as a string,
+        //we have them as an array, hence a showdow object is created to represent the original one
+        var data = {
+          cards: '',
+          players: []
+        }
+        data.cards = pokerTable.cards.join(" ")
+        pokerTable.players.map((p) => {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
+
+        this.$http.post('http://localhost:8080/api/analyze', data).then(
           (response) => {
             console.log(response.data)
             response.data.players.map((p) => {

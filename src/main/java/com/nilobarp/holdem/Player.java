@@ -1,9 +1,6 @@
 package com.nilobarp.holdem;
 
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class Player implements Comparable<Player> {
     @NotNull
@@ -12,23 +9,7 @@ public class Player implements Comparable<Player> {
     /**
      * Collection of cards the player has
      */
-    private List<String> cards;
-
-    /**
-     * Stores the reduced hash of cards
-     */
-    //@Optional
-    private HashMap<String, Integer> hash = new HashMap<String, Integer>();
-
-    /**
-     * Stores suits of cards without numbers
-     */
-    private String suits = "";
-
-    /**
-     * Collection of card values without suites
-     */
-    private List<Integer> cardValues;
+    private String cards;
 
     private Hand hand;
 
@@ -40,40 +21,12 @@ public class Player implements Comparable<Player> {
         this.id = id;
     }
 
-    public List<String> getCards () {
+    public String getCards () {
         return cards;
     }
 
-    public void setCards (List<String> cards) {
-        this.cards = cards;
-    }
-
-    public void setSuits (String suits) {
-        //sort the string of suits
-        //char[] s = suits.toCharArray();
-        //Arrays.sort(s);
-        //this.suits = new String(s);
-        this.suits = suits;
-    }
-
-    public String getSuits () {
-        return this.suits;
-    }
-
-    public void setHash (HashMap<String, Integer> hash) {
-        this.hash = hash;
-    }
-
-    public HashMap<String, Integer> getHash () {
-        return this.hash;
-    }
-
-    public void setCardValues (List<Integer> values) {
-        this.cardValues = values;
-    }
-
-    public List<Integer> getCardValues () {
-        return this.cardValues;
+    public void setCards (String cards) {
+        this.cards = cards.replaceAll("\\s", "");
     }
 
     public void setHand (Hand hand) {
@@ -92,9 +45,9 @@ public class Player implements Comparable<Player> {
         if (rankCompare != 0) {
             return rankCompare;
         } else {
-            return hand.getValue() > this.getHand().getValue() ? 1
-                    : hand.getValue() < this.getHand().getValue() ? -1
-                    : hand.getValue() - this.getHand().getValue();
+            return hand.getScore() > this.getHand().getScore() ? 1
+                    : hand.getScore() < this.getHand().getScore() ? -1
+                    : hand.getScore() - this.getHand().getScore();
         }
     }
 }

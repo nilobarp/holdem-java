@@ -3,15 +3,16 @@ package com.nilobarp.holdem;
 import java.util.List;
 
 public class Table {
-    private List<String> cards;
+    private String cards;
     private List<Player> players;
 
-    public List<String> getCards () {
+    public String getCards () {
         return cards;
     }
 
-    public void setCards (List<String> cards) {
-        this.cards = cards;
+    public void setCards (String cards) {
+        //chomp spaces if any
+        this.cards = cards.replaceAll("\\s", "");
     }
 
     public List<Player> getPlayers () {
