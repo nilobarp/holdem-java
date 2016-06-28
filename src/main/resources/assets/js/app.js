@@ -40,12 +40,12 @@ new Vue ({
           players: []
         }
         data.cards = pokerTable.cards.join(" ")
-        pokerTable.players.map((p) => {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
+        pokerTable.players.map(function (p)  {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
 
         this.$http.post('/api/analyze', data).then(
-          (response) => {
+          function (response) {
             console.log(response.data)
-            response.data.players.map((p) => {
+            response.data.players.map(function (p) {
               this.$refs["player" + p.id].setHand(p.hand.name)
             })
             this.$refs["player" + response.data.players[0].id].setWinner()
@@ -93,7 +93,7 @@ function gameState (state, action, instance) {
       break;
     case 'RESTART':
       pokerTable.cards = []
-      pokerTable.players.map((p) => {
+      pokerTable.players.map(function (p) {
         p.cards = []
       })
       instance.$broadcast('restart')
