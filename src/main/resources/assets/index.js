@@ -46,7 +46,7 @@ new Vue ({
             console.log(response.data)
             response.data.players.map(function (p) {
               this.$refs["player" + p.id].setHand(p.hand.name)
-            })
+            }).bind(this)
             this.$refs["player" + response.data.players[0].id].setWinner()
           }.bind(this)
         )
