@@ -41,14 +41,15 @@ new Vue ({
         data.cards = pokerTable.cards.join(" ")
         pokerTable.players.map(function (p)  {data.players.push( { id: p.id, cards: p.cards.join(" ") } )})
 
+        var vm = this
         this.$http.post('/api/analyze', data).then(
           function (response) {
             console.log(response.data)
             response.data.players.map(function (p) {
-              this.$refs["player" + p.id].setHand(p.hand.name)
-            }).bind(this)
-            this.$refs["player" + response.data.players[0].id].setWinner()
-          }.bind(this)
+              vm.$refs["player" + p.id].setHand(p.hand.name)
+            })
+            vm.$refs["player" + response.data.players[0].id].setWinner()
+          }
         )
       },
       'restart': function () {
