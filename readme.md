@@ -8,6 +8,7 @@ score to find the winner.
 
 Cards are stored in an int array along with their suit information.
 Each suit is weighed by a numeric value as:
+
 | Suit              | Weight  |
 | ---------------| ---------:|
 | Club             | 100       |
@@ -23,16 +24,18 @@ At the core of it, analyzer takes a `table` object which is a simple container c
 `run` method of `Analyzer` class churns through each player and passes the community cards and player's hold cards to a `reduce`r method.
 
 ###Reducer method
-- We start by combining the commuity and hold cards `community cards: ♥3 ♥5 ♣3 ♠5 ♥6`, `hold cards: ♥T ♠3`
+- We start by combining the commuity and hold cards 
 
-`hand: ♥3 ♥5 ♣3 ♠5 ♥6 ♥T ♠3`
+|community|hold|hand|
+|---------|----|----|
+|♥3 ♥5 ♣3 ♠5 ♥6|♥T ♠3|♥3 ♥5 ♣3 ♠5 ♥6 ♥T ♠3
 
 - Then represent hand numerically `Interger[]{303, 305, 103, 305, 306, 310, 403}`
-- Next a hash is created from the card values. This hash represents card frequency. i.e. if a 5 appears 3 times then the hash will be `{5: 3}`. Applying this to the hand we obtain `{3:3, 5:2, 6: 1, 10: 1}`
-- Up next card array is sorted using the hash for relevance. We use number of appearance of cards for relevance factor. In this example 3's will bubble up to top followed by 5's `Interger[]{303, 103, 403, 305, 405, 310, 306}` (value of suit doesn't matter for the ordering)
+- Next a hash is created from the card values. This hash represents card frequency. i.e. if 5 appears 3 times then the hash will be `{5: 3}`. Applying this to the hand we obtain `{3:3, 5:2, 6: 1, 10: 1}`
+- Up next, card array is sorted using the hash for relevance. We use number of appearance of cards for relevance factor. In this example 3's will bubble up to top followed by 5's `Interger[]{303, 103, 403, 305, 405, 310, 306}` (value of suit doesn't matter for the ordering)
 
 ###Score calculation
-Once we have the card's array ordered by relevance, a score can be easily calculated by bit shifting the card vaues by 4 places. With the card array last element of the array is used as is, second last gets shifted by 4 places, third last by 8 places and so on. `3<<24|3<<20|3<<16|5<<12|5<<8|10<<4|6 = 53695910`. This score is then used to find winning hands in addition to ranks.
+Once we have the card's array ordered by relevance, a score can be easily calculated by bit shifting the card vaues by 4 places. With the card array, last element of the array is used as is, second last gets shifted by 4 places, third last by 8 places and so on. `3<<24|3<<20|3<<16|5<<12|5<<8|10<<4|6 = 53695910`. This score is then used to find winning hands in addition to ranks.
 
 ###Build steps
 #####Frontend
@@ -47,6 +50,6 @@ Build with maven
 
 ###Run
 Start the server using `config.yml` from project root.
-`java -jar target/holdem-xxx.jar server config.yml`
+`java -jar target/holdem-1.0-SNAPSHOT.jar server config.yml`
 
 ###REST End Points
